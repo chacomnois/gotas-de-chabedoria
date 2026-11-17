@@ -39,6 +39,8 @@ function validateReading(leitura) {
 
 function sanitizeOutput(raw) {
   const reflexao = String(raw?.reflexao || '').trim();
+  const curiosidade = String(raw?.curiosidade || '').trim();
+  const desafio = String(raw?.desafio || '').trim();
   let frase = String(raw?.frase || '')
     .replace(/#[\p{L}\p{N}_]+/gu, '')
     .replace(/^["'“”]+|["'“”]+$/g, '')
@@ -71,6 +73,8 @@ function sanitizeOutput(raw) {
   return {
     reflexao,
     frase,
+    curiosidade,
+    desafio,
     hashtags: uniqueTags.join(' ')
   };
 }
@@ -122,6 +126,8 @@ export default async function handler(req, res) {
     `Responda SOMENTE em JSON válido com as chaves:`,
     `- "reflexao": 3 parágrafos curtos separados por uma linha em branco (o que os capítulos ensinam juntos, uma conexão ou contraste entre eles, e uma aplicação prática para hoje).`,
     `- "frase": frase de impacto para o Instagram, com até 140 caracteres, sem aspas e sem hashtags.`,
+    `- "curiosidade": 1 curiosidade ou contexto histórico/cultural breve sobre os capítulos do dia (2 a 3 frases, sem inventar fatos).`,
+    `- "desafio": 1 desafio ou ação prática objetiva para viver hoje (1 a 2 frases).`,
     `- "hashtags": 6 hashtags separadas por espaço, incluindo #GotasdeCHAbedoria.`
   ].join('\n');
 
@@ -132,7 +138,7 @@ export default async function handler(req, res) {
       input: prompt,
       store: false,
       generation_config: {
-        max_output_tokens: 700,
+        max_output_tokens: 950,
         temperature: 0.7
       },
       response_format: {
@@ -140,9 +146,11 @@ export default async function handler(req, res) {
         properties: {
           reflexao: { type: 'string' },
           frase: { type: 'string' },
+          curiosidade: { type: 'string' },
+          desafio: { type: 'string' },
           hashtags: { type: 'string' }
         },
-        required: ['reflexao', 'frase', 'hashtags']
+        required: ['reflexao', 'frase', 'curiosidade', 'desafio', 'hashtags']
       }
     });
 

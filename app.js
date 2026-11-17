@@ -16,7 +16,8 @@ const defaultState = () => ({
   done: {},
   ref: {},
   gen: {},
-  theme: ''
+  theme: '',
+  version: 'nvi'
 });
 
 let S = defaultState();
@@ -101,10 +102,13 @@ function genCard() {
   }
   return (
     h +
+    (g.c ? `<div class="gota-box"><strong>💡 Curiosidade</strong><p>${esc(g.c)}</p></div>` : '') +
+    (g.d ? `<div class="gota-box"><strong>🎯 Desafio de hoje</strong><p>${esc(g.d)}</p></div>` : '') +
     `<p class="mut sm">${esc(g.h || '')}</p>` +
     (gerr ? `<p class="sm gen-err">${esc(gerr)}</p>` : '') +
     '<div class="seg">' +
     '<button class="chip on" data-a="cp-legenda">Copiar legenda</button>' +
+    '<button class="chip" data-a="card-ig">Baixar card (Instagram)</button>' +
     '<button class="chip" data-a="gen">Gerar de novo</button>' +
     '</div>' +
     '<p class="mut sm" id="cpm" style="margin:8px 0 0">Gerado por IA: revise antes de postar.</p></div>'
@@ -140,14 +144,15 @@ function hoje() {
 
   h += `<div class="bar"><i style="width:${(c / 3) * 100}%"></i></div><p class="mut sm">${c} de 3 leituras concluídas</p>`;
 
+  const ver = S.version || 'nvi';
   p.forEach((b) => {
     h +=
       `<div class="card row ${b.ok ? 'ok' : ''}">` +
       `<button class="ck" data-a="tog" data-k="${b.k}" aria-pressed="${b.ok}" aria-label="Marcar ${b.n} como lido">${
         b.ok ? '✓' : ''
       }</button>` +
-      `<div class="g"><div class="mut sm">Ciclo ${b.cy}</div><div class="big">${b.n} ${b.ch}</div></div>` +
-      `<a class="chip" target="_blank" rel="noopener" href="https://www.bibliaonline.com.br/nvi/${b.slug}/${b.ch}">Ler ↗</a>` +
+      `<div class="g"><div class="mut sm">Ciclo ${b.cy} · ${ver.toUpperCase()}</div><div class="big">${b.n} ${b.ch}</div></div>` +
+      `<a class="chip" target="_blank" rel="noopener" href="https://www.bibliaonline.com.br/${ver}/${b.slug}/${b.ch}">Ler ↗</a>` +
       `</div>`;
   });
 
@@ -164,7 +169,10 @@ function hoje() {
     `<textarea id="ig-frase" rows="2" maxlength="200" placeholder="Escreva ou gere uma frase para postar…" data-f="ig">${esc(
       r.ig || ''
     )}</textarea>` +
+    `<div class="insta-actions">` +
     `<button class="chip" type="button" data-a="cp-ig">Copiar</button>` +
+    `<button class="chip" type="button" data-a="card-ig">Card</button>` +
+    `</div>` +
     `</div>` +
     `<p class="mut sm" id="sv" style="margin:0">Salvo automaticamente neste aparelho.</p>` +
     `</div>`
@@ -257,6 +265,16 @@ function cfg() {
     ]
       .map((t) => `<button class="chip ${S.theme === t[0] ? 'on' : ''}" data-a="th" data-v="${t[0]}">${t[1]}</button>`)
       .join('')}</div></div>` +
+    `<div class="card"><h2>Tradução da Bíblia</h2><div class="seg">${[
+      ['nvi', 'NVI'],
+      ['ara', 'ARA'],
+      ['ntlh', 'NTLH']
+    ]
+      .map(
+        (v) =>
+          `<button class="chip ${(S.version || 'nvi') === v[0] ? 'on' : ''}" data-a="ver" data-v="${v[0]}">${v[1]}</button>`
+      )
+      .join('')}</div></div>` +
     `<div class="card"><h2>Backup</h2><p class="mut sm">Exporte suas leituras e reflexões em JSON ou restaure um arquivo salvo anteriormente.</p>` +
     `<div class="seg">` +
     `<button class="chip" data-a="export">Exportar backup (.json)</button>` +
@@ -310,6 +328,8 @@ async function gen() {
     (S.gen = S.gen || {})[d] = {
       r: data.reflexao,
       f: data.frase,
+      c: data.curiosidade || '',
+      d: data.desafio || '',
       h: data.hashtags
     };
     S.ref[d] = S.ref[d] || {};
@@ -351,7 +371,8 @@ function importBackup(file) {
         done: data.done && typeof data.done === 'object' ? data.done : {},
         ref: data.ref && typeof data.ref === 'object' ? data.ref : {},
         gen: data.gen && typeof data.gen === 'object' ? data.gen : {},
-        theme: data.theme === 'light' || data.theme === 'dark' ? data.theme : ''
+        theme: data.theme === 'light' || data.theme === 'dark' ? data.theme : '',
+        version: ['nvi', 'ara', 'ntlh'].includes(data.version) ? data.version : 'nvi'
       };
       save();
       bmsg = 'Backup importado com sucesso ✓';
@@ -361,6 +382,74 @@ function importBackup(file) {
     render();
   };
   reader.readAsText(file);
+}
+
+function downloadInstaCard() {
+  const r = S.ref[sel] || {};
+  const g = (S.gen || {})[sel] || {};
+  const frase = (r.ig || g.f || '').trim();
+  if (!frase) {
+    gerr = 'Escreva ou gere uma frase para o Instagram antes de baixar o card.';
+    render();
+    return;
+  }
+
+  const canvas = document.createElement('canvas');
+  canvas.width = 1080;
+  canvas.height = 1350;
+  const ctx = canvas.getContext('2d');
+
+  ctx.fillStyle = '#f6f4ef';
+  ctx.fillRect(0, 0, 1080, 1350);
+
+  ctx.strokeStyle = '#3b6e5a';
+  ctx.lineWidth = 6;
+  ctx.strokeRect(48, 48, 984, 1254);
+
+  ctx.fillStyle = '#3b6e5a';
+  ctx.font = '600 36px Georgia, serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('💧 Gotas de CHAbedoria', 540, 150);
+
+  const leitura = plan(sel)
+    .map((b) => `${b.n} ${b.ch}`)
+    .join('  ·  ');
+  ctx.fillStyle = '#a8702a';
+  ctx.font = '500 28px Inter, system-ui, sans-serif';
+  ctx.fillText(leitura, 540, 205);
+
+  ctx.fillStyle = '#1f2a37';
+  ctx.font = '600 54px Georgia, serif';
+  const words = frase.split(/\s+/);
+  const lines = [];
+  let line = '';
+  for (const w of words) {
+    const test = line ? `${line} ${w}` : w;
+    if (ctx.measureText(test).width > 840) {
+      lines.push(line);
+      line = w;
+    } else {
+      line = test;
+    }
+  }
+  if (line) lines.push(line);
+
+  const lineHeight = 76;
+  const startY = 675 - ((lines.length - 1) * lineHeight) / 2;
+  lines.forEach((l, idx) => {
+    ctx.fillText(l, 540, startY + idx * lineHeight);
+  });
+
+  ctx.fillStyle = '#6b7280';
+  ctx.font = '500 26px Inter, system-ui, sans-serif';
+  ctx.fillText(`${fmt(sel)}  ·  #GotasdeCHAbedoria`, 540, 1230);
+
+  const a = document.createElement('a');
+  a.href = canvas.toDataURL('image/png');
+  a.download = `gotas-chabedoria-${sel}.png`;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
 }
 
 const NAV = [
@@ -444,6 +533,12 @@ document.addEventListener('click', (e) => {
   } else if (a === 'th') {
     S.theme = v;
     save();
+  } else if (a === 'ver') {
+    S.version = v;
+    save();
+  } else if (a === 'card-ig') {
+    downloadInstaCard();
+    return;
   } else if (a === 'export') {
     exportBackup();
     return;

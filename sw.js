@@ -1,4 +1,4 @@
-const CACHE = 'chabedoria-v1';
+const CACHE = 'chabedoria-v2';
 const ASSETS = [
   './',
   './index.html',
