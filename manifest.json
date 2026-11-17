@@ -1,0 +1,19 @@
+{
+  "name": "Gotas de CHAbedoria",
+  "short_name": "CHAbedoria",
+  "description": "Devocional diário em Salmos, Provérbios e Eclesiastes",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f6f4ef",
+  "theme_color": "#3b6e5a",
+  "lang": "pt-BR",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "name": "gotas-de-chabedoria",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Devocional diário em Salmos, Provérbios e Eclesiastes",
+  "dependencies": {
+    "@google/genai": "^3.2.0"
+  }
+}

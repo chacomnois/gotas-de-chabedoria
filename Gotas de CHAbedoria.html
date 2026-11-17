@@ -1,0 +1,136 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Gotas de CHAbedoria</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light;--bg:#f6f4ef;--card:#fff;--ink:#1f2a37;--mut:#6b7280;--line:#e6e1d6;--acc:#3b6e5a;--acc2:#e6f0ea;--warm:#a8702a}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#13171a;--card:#1b2024;--ink:#e8ecef;--mut:#98a2ab;--line:#2a3238;--acc:#6fb59a;--acc2:#1f2d28;--warm:#e0a85a}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#13171a;--card:#1b2024;--ink:#e8ecef;--mut:#98a2ab;--line:#2a3238;--acc:#6fb59a;--acc2:#1f2d28;--warm:#e0a85a}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+h1,h2,.big,.brand,.vs,.stats b{font-family:Fraunces,Georgia,serif}
+h1{font-size:1.45rem;margin:0}h1::first-letter{text-transform:uppercase}h2{font-size:1.1rem;margin:0 0 .6rem}
+main{max-width:720px;margin:0 auto;padding:20px 16px 100px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin:12px 0}
+.row{display:flex;align-items:center;gap:14px}.g{flex:1}.row2{display:flex;justify-content:space-between;gap:8px;margin-bottom:8px}
+.ck{width:36px;height:36px;border-radius:50%;border:2px solid var(--line);background:transparent;color:#fff;font-size:18px;cursor:pointer;flex:none}
+.ok .ck{background:var(--acc);border-color:var(--acc)}.ok .big{opacity:.55}
+.chip{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:6px 14px;font:inherit;font-size:.85rem;cursor:pointer;text-decoration:none;display:inline-block}
+.chip.on{background:var(--acc);color:#fff;border-color:var(--acc)}.warn{color:#c0392b}
+.bar{height:8px;background:var(--line);border-radius:99px;overflow:hidden}.bar i{display:block;height:100%;background:var(--acc);border-radius:99px;transition:width .3s}
+.top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px}.top>div,.top>h1{flex:1;text-align:center}
+.ib{width:40px;height:40px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-size:20px;cursor:pointer}
+textarea,input{width:100%;font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:10px;margin:4px 0 12px;resize:vertical}
+label{display:block;font-size:.85rem;color:var(--mut);font-weight:500}
+.mut{color:var(--mut)}.sm{font-size:.85rem}.big{font-size:1.25rem;font-weight:600}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center}.wd{color:var(--mut);font-size:.75rem}
+.day{aspect-ratio:1;border:1px solid transparent;border-radius:12px;background:transparent;color:var(--ink);font:inherit;cursor:pointer;padding:2px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.day em{font-style:normal;font-size:7px;color:var(--acc);letter-spacing:1px;height:9px}
+.day.td{border-color:var(--acc)}.day.sl{background:var(--acc2)}.day.off{opacity:.35}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.stats .card{text-align:center;margin:0}
+.stats b{display:block;font-size:1.8rem;color:var(--acc)}.stats span{font-size:.8rem;color:var(--mut)}
+.seg{display:flex;gap:8px;flex-wrap:wrap}.vs{font-style:italic;font-size:1.05rem;color:var(--warm);margin:.4rem 0}
+#nav{position:fixed;left:0;right:0;bottom:0;display:flex;background:var(--card);border-top:1px solid var(--line);padding:6px 4px calc(6px + env(safe-area-inset-bottom,0px));z-index:5}
+#nav button{flex:1;border:0;background:none;color:var(--mut);font:inherit;font-size:.7rem;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px;border-radius:12px;cursor:pointer}
+#nav button span{font-size:1.2rem}#nav .on{color:var(--acc);font-weight:600}.brand{display:block;padding:18px 16px 0;max-width:720px;margin:0 auto;font-size:1.2rem;font-weight:600}
+@media(min-width:820px){
+.app{display:grid;grid-template-columns:230px 1fr}
+aside{padding:24px 14px;border-right:1px solid var(--line);position:sticky;top:0;height:100dvh}
+#nav{position:static;flex-direction:column;border:0;padding:0;background:none;gap:4px}
+#nav button{flex-direction:row;font-size:.95rem;gap:10px;justify-content:flex-start;padding:10px 12px}
+#nav .on{background:var(--acc2)}.brand{padding:0;max-width:none;margin:0 0 18px;font-size:1.3rem}main{padding-bottom:40px}}
+.gen{border-color:var(--acc)}.gen p{white-space:pre-wrap}.fr{font-family:Fraunces,Georgia,serif;font-size:1.25rem;line-height:1.35;color:var(--acc);margin:.8rem 0}</style></head><body>
+<div class="app"><aside><div class="brand">💧 Gotas de CHAbedoria</div><nav id="nav"></nav></aside><main id="main"></main></div>
+<script>
+const iso=d=>{const z=new Date(d.getTime()-d.getTimezoneOffset()*6e4);return z.toISOString().slice(0,10)};
+const BK=[{k:'s',n:'Salmos',t:150,slug:'sl'},{k:'p',n:'Provérbios',t:31,slug:'pv'},{k:'e',n:'Eclesiastes',t:12,slug:'ec'}];
+let S={start:iso(new Date()),done:{},ref:{},theme:''};
+try{const x=localStorage.getItem('dev1');if(x)S=Object.assign(S,JSON.parse(x))}catch(e){}
+const save=()=>{try{localStorage.setItem('dev1',JSON.stringify(S))}catch(e){}};
+const $=s=>document.querySelector(s),today=()=>iso(new Date());
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fmt=s=>new Date(s+'T12:00').toLocaleDateString('pt-BR',{day:'2-digit',month:'short',year:'numeric'});
+const dn=s=>Math.round((new Date(s+'T12:00')-new Date(S.start+'T12:00'))/864e5);
+const addDays=(s,n)=>{const d=new Date(s+'T12:00');d.setDate(d.getDate()+n);return iso(d)};
+const plan=d=>{const n=dn(d);return BK.map(b=>({...b,ch:((n%b.t)+b.t)%b.t+1,cy:Math.floor(n/b.t)+1,ok:!!(S.done[d]&&S.done[d][b.k])}))};
+const cnt=d=>S.done[d]?BK.filter(b=>S.done[d][b.k]).length:0;
+const full=d=>dn(d)>=0&&cnt(d)===3;
+const hasRef=d=>{const r=S.ref[d];return !!(r&&(r.v||r.r||r.o))};
+function streak(){let d=today(),n=0;if(!full(d))d=addDays(d,-1);while(full(d)){n++;d=addDays(d,-1)}return n}
+let V='hoje',sel=today(),cm=new Date(),rs=false;cm.setDate(1);
+
+function hoje(){
+ const n=dn(sel),p=plan(sel),c=cnt(sel),r=S.ref[sel]||{};
+ const dt=new Date(sel+'T12:00').toLocaleDateString('pt-BR',{weekday:'long',day:'numeric',month:'long'});
+ let h=`<div class="top"><button class="ib" data-a="nav" data-v="-1" aria-label="Dia anterior">‹</button><div><h1>${dt}</h1><p class="mut sm" style="margin:2px 0 0">${n<0?'Antes do início do plano':'Dia '+(n+1)+' do plano · '+streak()+' dia(s) seguidos'}</p></div><button class="ib" data-a="nav" data-v="1" aria-label="Próximo dia">›</button></div>`;
+ if(sel!==today())h+=`<p style="text-align:center"><button class="chip" data-a="goto">Voltar para hoje</button></p>`;
+ if(n<0)return h+`<div class="card"><p>O plano começa em ${fmt(S.start)}. Ajuste a data inicial em Ajustes.</p></div>`;
+ h+=`<div class="bar"><i style="width:${c/3*100}%"></i></div><p class="mut sm">${c} de 3 leituras concluídas</p>`;
+ p.forEach(b=>h+=`<div class="card row ${b.ok?'ok':''}"><button class="ck" data-a="tog" data-k="${b.k}" aria-pressed="${b.ok}" aria-label="Marcar ${b.n} como lido">${b.ok?'✓':''}</button><div class="g"><div class="mut sm">Ciclo ${b.cy}</div><div class="big">${b.n} ${b.ch}</div></div><a class="chip" target="_blank" rel="noopener" href="https://www.bibliaonline.com.br/nvi/${b.slug}/${b.ch}">Ler ↗</a></div>`);
+ return h+genCard()+`<div class="card"><h2>Reflexão do dia</h2><label>Versículo que marcou<textarea rows="2" data-f="v">${esc(r.v||'')}</textarea></label><label>O que Deus falou comigo<textarea rows="4" data-f="r">${esc(r.r||'')}</textarea></label><label>Aplicação / oração<textarea rows="3" data-f="o">${esc(r.o||'')}</textarea></label><p class="mut sm" id="sv" style="margin:0">Salvo automaticamente neste aparelho.</p></div>`}
+
+function cal(){
+ const y=cm.getFullYear(),m=cm.getMonth(),first=new Date(y,m,1).getDay(),len=new Date(y,m+1,0).getDate();
+ let h=`<div class="top"><button class="ib" data-a="cm" data-v="-1" aria-label="Mês anterior">‹</button><h1>${cm.toLocaleDateString('pt-BR',{month:'long',year:'numeric'})}</h1><button class="ib" data-a="cm" data-v="1" aria-label="Próximo mês">›</button></div><div class="card"><div class="cal">`;
+ 'DSTQQSS'.split('').forEach(x=>h+=`<b class="wd">${x}</b>`);
+ for(let i=0;i<first;i++)h+='<span></span>';
+ for(let d=1;d<=len;d++){const s=iso(new Date(y,m,d,12));h+=`<button class="day ${s===today()?'td':''} ${s===sel?'sl':''} ${dn(s)<0?'off':''}" data-a="day" data-d="${s}">${d}<em>${'●'.repeat(cnt(s))}</em></button>`}
+ return h+'</div></div><p class="mut sm">Os pontos mostram quantas das 3 leituras foram concluídas em cada dia. Toque num dia para abri-lo.</p>'}
+
+function refs(q=''){
+ const ks=Object.keys(S.ref).filter(d=>hasRef(d)&&(!q||JSON.stringify(S.ref[d]).toLowerCase().includes(q))).sort().reverse();
+ return ks.map(d=>{const r=S.ref[d];return `<div class="card"><div class="mut sm">${fmt(d)}</div>${r.v?`<p class="vs">${esc(r.v)}</p>`:''}${r.r?`<p>${esc(r.r)}</p>`:''}${r.o?`<p class="mut">🙏 ${esc(r.o)}</p>`:''}<button class="chip" data-a="day" data-d="${d}">Abrir dia</button></div>`}).join('')||'<p class="mut">Nenhuma reflexão encontrada.</p>'}
+
+function prog(){
+ const ds=Object.keys(S.done);
+ let h=`<div class="top"><h1>Progresso</h1></div><div class="stats"><div class="card"><b>${streak()}</b><span>dias seguidos</span></div><div class="card"><b>${ds.filter(d=>full(d)).length}</b><span>dias completos</span></div><div class="card"><b>${Object.keys(S.ref).filter(hasRef).length}</b><span>reflexões</span></div></div>`;
+ BK.forEach(b=>{const n=ds.filter(d=>S.done[d][b.k]).length,cy=Math.floor(n/b.t);h+=`<div class="card"><div class="row2"><b>${b.n}</b><span class="mut sm">${n} cap. lidos${cy?' · '+cy+' ciclo(s) completo(s)':''}</span></div><div class="bar"><i style="width:${(n%b.t)/b.t*100}%"></i></div><p class="mut sm" style="margin:6px 0 0">${n%b.t} de ${b.t} no ciclo ${cy+1}</p></div>`});
+ return h}
+
+function cfg(){return `<div class="top"><h1>Ajustes</h1></div><div class="card"><label>Data de início do plano<input type="date" id="st" value="${S.start}"></label><p class="mut sm" style="margin:0">Os capítulos avançam por data (todos leem o mesmo dia): Salmos 1–150, Provérbios 1–31 e Eclesiastes 1–12, recomeçando ao terminar cada livro.</p></div><div class="card"><h2>Tema</h2><div class="seg">${[['','Automático'],['light','Claro'],['dark','Escuro']].map(t=>`<button class="chip ${S.theme===t[0]?'on':''}" data-a="th" data-v="${t[0]}">${t[1]}</button>`).join('')}</div></div><div class="card"><h2>Dados</h2><p class="mut sm">Tudo fica salvo apenas neste navegador.</p><button class="chip warn" data-a="reset">${rs?'Toque de novo para apagar tudo':'Apagar todos os dados'}</button></div>`}
+
+let busy=false,gerr='';
+function genCard(){
+ const g=(S.gen||{})[sel];let h='<div class="card gen"><h2>💧 Gota do dia</h2>';
+ if(busy)return h+'<p class="mut">Gerando reflexão e frase…</p></div>';
+ if(!g)return h+`<p class="mut sm">Gere uma reflexão sobre os três capítulos e uma frase de impacto para o Instagram.</p>${gerr?`<p class="sm" style="color:#c0392b">${esc(gerr)}</p>`:''}<button class="chip on" data-a="gen">Gerar com Claude</button></div>`;
+ return h+`<p>${esc(g.r)}</p><p class="fr">${esc(g.f)}</p><p class="mut sm">${esc(g.h)}</p><div class="seg"><button class="chip" data-a="cp" data-w="f">Copiar frase</button><button class="chip" data-a="cp" data-w="a">Copiar legenda completa</button><button class="chip" data-a="gen">Gerar de novo</button></div><p class="mut sm" id="cpm" style="margin:8px 0 0">Gerado por IA: revise antes de postar.</p></div>`}
+async function gen(){
+ const d=sel,l=plan(d).map(b=>b.n+' '+b.ch).join(', ');busy=true;gerr='';render();
+ try{
+  const sm=await claude.use('sample');if(!sm)throw{message:'indisponível'};
+  const r=await sm(`Você escreve para o projeto devocional "Gotas de CHAbedoria". Leitura de hoje: ${l}. Escreva em português do Brasil, tom acolhedor e direto, sem citar versículos longos (parafraseie) e sem inventar conteúdo: se não tiver certeza do que há num capítulo, seja mais geral. Responda SOMENTE um JSON, sem crases, com as chaves: "reflexao" (3 parágrafos curtos separados por uma linha em branco: o que os capítulos ensinam juntos, uma conexão ou contraste entre eles, uma aplicação prática para hoje), "frase" (frase de impacto para Instagram, até 140 caracteres, sem aspas e sem hashtags), "hashtags" (6 hashtags separadas por espaço, incluindo #GotasdeCHAbedoria).`,{cache:false});
+  const j=JSON.parse(r.text.replace(/```json|```/g,'').trim());
+  (S.gen=S.gen||{})[d]={r:j.reflexao,f:j.frase,h:j.hashtags};save();
+ }catch(e){gerr=e&&e.code==='not_granted'?'Permissão negada para gerar.':e&&e.code==='rate_limited'?'Muitas tentativas. Tente de novo em instantes.':'Não foi possível gerar agora. Tente novamente.'}
+ busy=false;render()}
+async function copy(t){try{await navigator.clipboard.writeText(t)}catch(e){const a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();try{document.execCommand('copy')}catch(x){}a.remove()}}
+const NAV=[['hoje','☀','Hoje'],['cal','▦','Calendário'],['ref','✎','Reflexões'],['prog','◔','Progresso'],['cfg','⚙','Ajustes']];
+const VIEWS={hoje,cal,prog,cfg,ref:()=>`<div class="top"><h1>Reflexões</h1></div><input data-q placeholder="Buscar nas reflexões…"><div id="rl">${refs()}</div>`};
+function render(){
+ if(S.theme)document.documentElement.dataset.theme=S.theme;else document.documentElement.removeAttribute('data-theme');
+ $('#nav').innerHTML=NAV.map(n=>`<button class="${V===n[0]?'on':''}" data-a="tab" data-v="${n[0]}"><span>${n[1]}</span>${n[2]}</button>`).join('');
+ $('#main').innerHTML=VIEWS[V]();
+}
+document.addEventListener('click',e=>{
+ const t=e.target.closest('[data-a]');if(!t)return;const a=t.dataset.a,v=t.dataset.v;
+ if(a!=='reset')rs=false;
+ if(a==='tab')V=v;
+ else if(a==='nav')sel=addDays(sel,+v);
+ else if(a==='goto')sel=today();
+ else if(a==='tog'){(S.done[sel]=S.done[sel]||{})[t.dataset.k]=!(S.done[sel][t.dataset.k]);save()}
+ else if(a==='cm')cm.setMonth(cm.getMonth()+ +v);
+ else if(a==='day'){sel=t.dataset.d;V='hoje'}
+ else if(a==='gen'){gen();return}
+ else if(a==='cp'){const g=(S.gen||{})[sel];if(g)copy(t.dataset.w==='f'?g.f:g.f+'\n\n'+g.r+'\n\n'+g.h).then(()=>{const m=$('#cpm');if(m)m.textContent='Copiado ✓'});return}
+ else if(a==='th'){S.theme=v;save()}
+ else if(a==='reset'){if(rs){S={start:iso(new Date()),done:{},ref:{},theme:''};save();rs=false}else rs=true}
+ render()});
+document.addEventListener('input',e=>{
+ const f=e.target.dataset.f;
+ if(f){(S.ref[sel]=S.ref[sel]||{})[f]=e.target.value;save();$('#sv').textContent='Salvo ✓'}
+ else if('q' in e.target.dataset)$('#rl').innerHTML=refs(e.target.value.toLowerCase())});
+document.addEventListener('change',e=>{if(e.target.id==='st'&&e.target.value){S.start=e.target.value;save();render()}});
+render();
+</script></body></html>
